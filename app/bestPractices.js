@@ -1,5 +1,6 @@
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
+
 /**
  * This file defines an object with some methods. Some of these methods are
  * populated incorrectly; your job is to fix them. Other methods are not
@@ -7,30 +8,31 @@ if (typeof define !== 'function') { var define = require('amdefine')(module); }
  */
 define(function() {
   return {
-    globals : function() {
-      myObject = {
-        name : 'Jory'
+    globals: function() {
+      var myObject = {
+        name: 'Jory'
       };
 
       return myObject;
     },
 
-    functions : function(flag) {
-      if (flag) {
-        function getValue() { return "a"; }
-      } else {
-        function getValue() { return "b"; }
+    functions: function(flag) {
+      function getValue() {
+        if (flag) {
+          return 'a';
+        } else {
+          return 'b';
+        }
       }
-
       return getValue();
     },
 
-    parseInt : function(num) {
-      return parseInt(num);
+    parseInt: function(num, radix) {
+      return parseInt(num, radix);
     },
 
-    identity : function(val1, val2) {
-
+    identity: function(val1, val2) {
+      return val1 === val2;
     }
   };
 });
