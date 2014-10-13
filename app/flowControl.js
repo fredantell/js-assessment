@@ -2,21 +2,47 @@ if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
 define(function() {
   return {
-    fizzBuzz: function(num) {
+    fizzBuzz : function(num) {
       // write a function that receives a number as its argument;
       // if the number is divisible by 3, the function should return 'fizz';
       // if the number is divisible by 5, the function should return 'buzz';
-      // if the number is divisible the 3 and 5, the function should return
+      // if the number is divisible by 3 and 5, the function should return
       // 'fizzbuzz';
       //
       // otherwise the function should return the number, or false if no number
-      // was provided
-      if (arguments.length === 0) return false;
-      if (num % 3 === 0 && num % 5 === 0) return 'fizzbuzz';
-      if (num % 3 === 0) return 'fizz';
-      if (num % 5 === 0) return 'buzz';
-      return num;
+      // was provided or the value provided is not a number
 
+        //a more fun version:
+        //*
+        var fizz = function(x) {
+            return x % 3 === 0 ? 'fizz' : '';
+        };
+        var buzz = function(x) {
+            return x % 5 === 0 ? 'buzz' : '';
+        };
+        var fizzBuzz = function(x) {
+            //return immediately if not number
+            if (typeof x !== 'number') {return false;}
+            
+            var result = fizz(x) + buzz(x);
+            return result ? result : x;
+        };
+
+        return fizzBuzz(num);
+        //*/
+
+        
+       //a more straightforward (and thus better) version:
+        /*
+        var straightForwardFizzBuzz = function(x) {
+            if (x % 5 === 0 && x % 3 === 0) {return 'fizzbuzz'}
+            if (x % 5 === 0) {return 'buzz'}
+            if (x % 3 === 0) {return 'fizz'}
+            return typeof x === 'number' ? x : false;
+        };
+        return straightForwardFizzBuzz(num);
+        //*/
+        
     }
   };
 });

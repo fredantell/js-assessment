@@ -1,29 +1,23 @@
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['jquery'], function($) {
+define([ 'jquery' ], function($) {
   return {
-    async: function(value) {
-      var promise = $.Deferred();
-      promise.resolve(value);
-      return promise;
-
+    async : function(value) {
+        var promise = $.Deferred();
+        promise.resolve(value);
+        return promise;
     },
 
-    manipulateRemoteData: function(url) {
-
-      var promise = $.Deferred();
-      $.ajax(url, {
-        success: function(res) {
-          var names = [];
-          for (var i = 0; i < res.people.length; i++) {
-            names.push(res.people[i].name);
-          }
-          names.sort();
-          promise.resolve(names);
-        }
-      });
-      return promise;
+    manipulateRemoteData : function(url) {
+        var deferred = $.Deferred();
+        var ajax = $.get(url).then(function(data) {
+            var ppl = [];
+            data.people.forEach(function(obj) {
+                ppl.push(obj.name);
+            });
+            deferred.resolve(ppl.sort());
+        });
+        return deferred;
     }
-
   };
 });
